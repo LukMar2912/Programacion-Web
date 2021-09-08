@@ -1,0 +1,97 @@
+<form [formGroup]="bikeform" (ngSubmit)="submitRegistration()">
+    <div *ngIf="validMessage  != ''">
+        <h3 class="has-info">{{ validMessage }}</h3>
+    </div>
+
+    <div class="form-group">
+        <label>Nick Name Twitter</label>
+        <!-- con formControlName vinculo cada entrada de la vista con su respectivo Control del TS -->
+        <input type="text" class="form-control" formControlName="name">
+        <!-- mostramos un mensaje al usuario para indicar que la entrada se encuentra errada o vacia    -->
+        <div *ngIf="controles.name.errors?.pattern">
+            <p style="color: red;">Username Invalid</p>
+        </div>
+        <!-- <span>{{ getError('name') }}</span> -->
+
+        <!-- Estados de Validación :
+        valid : el control ha pasado todos los chequeos 
+        invalid : el control ha fallado al menos en un chequeo
+        pending : el control esta en medio de un proceso de valicion
+        disable :  el control está desactivado y exento de validación
+    
+    Cuando un control incumple con alguna de las reglas de validacion , estas se reflejan en su propiedad
+            "errors" que séra un objeto con una propiedad por cada una de las reglas insatisfechas
+            y un valor o mensaje de ayuda guardado en dicha propiedad
+    -->
+
+        <!-- Estado de modificación:
+        los controles se somenten a otra máquina de estados que monitoriza el valor 
+        del control y sus cambios 
+
+        la maquina de estados contempla entre otros los siguientes cambios :
+        pristine : el valor del control no ah sido cambiado por el usuario 
+        dirty: el usuario ha modificado el valor del control 
+        touched : el usuario ah tocado el control lanzando el evento blur al salir 
+        untouched : el usuario no ha tocado en control ,osea no lanzo el evento blur 
+     -->
+
+
+
+
+    </div>
+    <div class="form-group">
+        <label>Email</label>
+        <input type="text" class="form-control" formControlName="email">
+
+    </div>
+    <div class="form-group">
+        <label>Phone</label>
+        <input type="text" class="form-control" formControlName="phone" required>
+    </div>
+    <div *ngIf="controles.phone.errors?.pattern">
+        <p style="color: red;">Phone Number Not Valid</p>
+    </div>
+
+
+    <div class="form-group">
+        <label>Bike Model</label>
+        <select class="form-control" formControlName="model">
+          <option *ngFor="let model of models" [value]="model">
+            {{model}}
+          </option>
+      </select>
+    </div>
+    <div class="form-group">
+        <label>Bike Serial Number</label>
+        <input type="text" class="form-control" formControlName="serialNumber">
+    </div>
+    <div class="form-group">
+        <label>Purchase Price</label>
+        <input type="text" class="form-control" formControlName="purchasePrice">
+    </div>
+    <div class="form-group">
+        <label>Purchase Date</label>
+        <input type="text" class="form-control" formControlName="purchaseDate">
+    </div>
+    <div class="form-group">
+        <label>Contact</label>
+        <select class="form-control" formControlName="contact">
+            <option value="selecciona">--Seleccione--</option>
+            <option value="true">Si</option>
+            <option value="false">No</option>            
+        </select>
+        <div *ngIf="controles.contact.value == 'selecciona' && controles.contact.touched ">
+            <p style="color: red;">Seleccionar Este Campo</p>
+        </div>
+    </div>
+
+    <!-- si el formulario es invalido oculto el boton -->
+    <div *ngIf="bikeform.valid">
+        <button type="submit" class="btn btn-primary">Enviar Formulario</button>
+    </div>
+    <br>
+    <!-- si el formulario es invalido desabilitamos el boton -->
+
+    <!-- <button [disabled]="bikeform.invalid" type="submit" class="btn btn-primary">Enviar Formulario</button> -->
+
+</form>

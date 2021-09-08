@@ -1,0 +1,7 @@
+/* utilizamos los estilos del bootstrap de manera global */
+
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+/* tambien utilizamos nuestros estilos porpio de manera global  */
+
+@import './css/bike.css';
